@@ -1,24 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios'
+import UserData from './components/UserData'
+import OnLoadingUserData from './components/OnLoadingUserData'
 
 function App() {
+
+  const DataLoading = OnLoadingUserData(UserData);
+
+  const [appState, setAppState] = useState(
+    {
+      loading: false,
+      persons: null,
+    }
+  )
+
+  useEffect(() => {
+    setAppState({ loading: true })
+    axios.get('http://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}')
+      .then(resp => {
+        const persons = resp.data
+        setAppState({ loading: false, persons: persons })
+      })
+
+  }, [setAppState])
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <DataLoading isLoading={appState.loading} persons={appState.persons} />
     </div>
   );
 }
