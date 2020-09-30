@@ -42,6 +42,11 @@ table {
   margin: 0 auto;
 }
 
+
+.clicable-row {
+  cursor: pointer;
+}
+
 button {
   height: 4rem;
   width: 16rem;
@@ -54,4 +59,15 @@ button {
   align-self: center;
   font-size: 2.4rem;
   margin-top: 2rem;
+}
+
+
+.show-selected-person {
+  width: 60%;
+  margin: 2rem auto;
+
+}
+
+.selected {
+  background-color: lightsalmon;
 }

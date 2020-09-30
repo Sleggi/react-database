@@ -1,11 +1,24 @@
 import React from 'react'
+import ShowSelectedPerson from '../components/ShowSelectedPerson'
 
 function UserData(props) {
 
+    const [selectedPerson, setSelectedPerson] = React.useState()
+
     const { persons } = props
+
     if (!persons || persons.lengt === 0) return <p className='no-data'>Нет данных. Попробуйте загрузить (:</p>
 
-    console.log(persons)
+
+
+    const showDataHandle = (id) => {
+        persons.filter(person => {
+            if (person.id === id) return setSelectedPerson(person)
+            else return null
+        })
+    }
+
+
     return (
         <div>
             <table>
@@ -21,7 +34,13 @@ function UserData(props) {
                 <tbody>
                     {
                         persons.map((person) =>
-                            <tr key={person.id}>
+                            <tr key={person.id} onClick={() => showDataHandle(person.id)}
+                                className={selectedPerson
+                                    ? selectedPerson.id === person.id
+                                        ? 'clicable-row selected'
+                                        : 'clicable-row'
+                                    : 'clicable-row'}
+                            >
                                 <td>{person.id}</td>
                                 <td>{person.firstName}</td>
                                 <td>{person.lastName}</td>
@@ -33,6 +52,7 @@ function UserData(props) {
 
                 </tbody>
             </table>
+            <ShowSelectedPerson person={selectedPerson} />
         </div>
     )
 }
