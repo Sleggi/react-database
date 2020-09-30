@@ -3,7 +3,7 @@ import React from 'react'
 function UserData(props) {
 
     const { persons } = props
-    if (!persons || persons.lengt === 0) return <p>Нет данных</p>
+    if (!persons || persons.lengt === 0) return <p className='no-data'>Нет данных. Попробуйте загрузить (:</p>
 
     console.log(persons)
     return (

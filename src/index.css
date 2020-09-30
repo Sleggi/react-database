@@ -14,6 +14,7 @@ body {
   font-size: 1.6rem;
   font-family: 'Roboto', sans-serif;
   background-color: #aaa7cc;
+  overflow-x: hidden;
 }
 
 
@@ -24,9 +25,10 @@ h1 {
 
 .app {
   width: 120rem;
-  height: 100vh;
   margin: 0 auto;
   background-color: #eeeeee;
+  display: flex;
+  flex-direction: column;
 }
 
 table,
@@ -38,4 +40,18 @@ td {
 table {
   width: 80%;
   margin: 0 auto;
+}
+
+button {
+  height: 4rem;
+  width: 16rem;
+  margin: .5rem;
+  align-self: center;
+  cursor: pointer;
+}
+
+.no-data {
+  align-self: center;
+  font-size: 2.4rem;
+  margin-top: 2rem;
 }
