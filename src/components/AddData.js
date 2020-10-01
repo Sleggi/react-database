@@ -1,20 +1,27 @@
 import React from 'react'
 import { Formik, Form, Field } from 'formik'
+import axios from 'axios'
 
-function AddData() {
+function AddData({ setAddedData }) {
+
+
 
     const initialValues = {
-        id: '',
         firstName: '',
-        lastName: '',
         email: '',
-        phone: ''
+        body: ''
     }
 
     const handlePostData = (values, { resetForm }) => {
-        console.log(values);
+        axios.post('https://jsonplaceholder.typicode.com/comments', values)
+            .then((resp) => {
+                const addedData = resp.data;
+                setAddedData(addedData)
+            })
+            .catch(err => console.log(err));
         resetForm({ values: '' });
     }
+
 
 
 
@@ -23,13 +30,10 @@ function AddData() {
             initialValues={initialValues}
             onSubmit={handlePostData}>
             <Form className='add-data__window'>
-                <Field type="number" min='0' placeholder='id' name='id' />
                 <Field type="text" placeholder='firstName' name='firstName' />
-                <Field type="text" placeholder='lastName' name='lastName' />
                 <Field type="email" placeholder='email' name='email' />
-                <Field type="text" placeholder='phone' name='phone' />
+                <Field type="text" placeholder='body' name='body' />
                 <button type='submit'>Добавить данные</button>
-
             </Form>
         </Formik>
     )

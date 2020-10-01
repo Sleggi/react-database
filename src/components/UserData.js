@@ -1,72 +1,81 @@
 import React from 'react'
-import ShowSelectedPerson from '../components/ShowSelectedPerson'
+import ShowSelectedPost from '../components/ShowSelectedPost'
 import AddData from '../components/AddData'
 
 function UserData(props) {
 
     // стейт выбранного пользователя
-    const [selectedPerson, setSelectedPerson] = React.useState()
+    const [selectedPost, setSelectedPost] = React.useState()
     // стейт отображения добавления новый пользователей
     const [showAddData, setShowAddData] = React.useState(false)
+    // добавленные данные
+    const [addedData, setAddedData] = React.useState()
     // достаем persons из пропс
-    const { persons, dataSize } = props
+    const { posts } = props
     // проверяем есть ли данные в пропс
-    if (!persons || persons.lengt === 0) return <p className='no-data'>Нет данных. Попробуйте загрузить (:</p>
+    if (!posts || posts.lengt === 0) return <p className='no-data'>Нет данных. Попробуйте загрузить (:</p>
 
 
     // отображаем выбранного пользователя под таблицей
     const showDataHandle = (id) => {
-        persons.filter(person => {
-            if (person.id === id) return setSelectedPerson(person)
+        posts.filter(post => {
+            if (post.id === id) return setSelectedPost(post)
             else return null
         })
     }
 
-    const handleAddSmallData = () => {
+    const handleAddData = () => {
         setShowAddData(true)
     }
 
     return (
         <div className='data-table'>
-            <p className='add-data'>Добавить данные в {
-                dataSize === 'small' ? <button className='add-data__btn' onClick={handleAddSmallData}>малую базу данных</button> : <button className='add-data__btn' onClick={handleAddSmallData}>крупную базу данных</button>
-            }</p>
+            <p className='add-data'>Добавить данные в <button className='add-data__btn' onClick={handleAddData}>таблицу</button></p>
             {
-                showAddData ? <AddData /> : ''
+                showAddData ? <AddData setAddedData={setAddedData} /> : ''
             }
-
+            {
+                addedData ?
+                    <div className="addedData">
+                        <p>Вы добавили следующие данные на сервер:</p>
+                        <p>ID - <b>{addedData.id}</b></p>
+                        <p>Name - <b>{addedData.firstName}</b></p>
+                        <p>Email - <b>{addedData.email}</b></p>
+                    </div>
+                    : ''
+            }
             <table>
                 <thead>
                     <tr>
                         <th>id</th>
                         <th>firstName</th>
-                        <th>lastName</th>
+
                         <th>email</th>
-                        <th>phone</th>
+                        <th>text</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        persons.map((person, index) =>
-                            <tr key={index} onClick={() => showDataHandle(person.id)}
-                                className={selectedPerson
-                                    ? selectedPerson.id === person.id
+                        posts.map((post) =>
+                            <tr key={post.id} onClick={() => showDataHandle(post.id)}
+                                className={selectedPost
+                                    ? selectedPost.id === post.id
                                         ? 'clicable-row selected'
                                         : 'clicable-row'
                                     : 'clicable-row'}
                             >
-                                <td>{person.id}</td>
-                                <td>{person.firstName}</td>
-                                <td>{person.lastName}</td>
-                                <td>{person.email}</td>
-                                <td>{person.phone}</td>
+                                <td>{post.id}</td>
+                                <td>{post.name}</td>
+
+                                <td>{post.email}</td>
+                                <td>{post.body}</td>
                             </tr>
                         )
                     }
 
                 </tbody>
             </table>
-            <ShowSelectedPerson person={selectedPerson} />
+            <ShowSelectedPost post={selectedPost} />
         </div>
     )
 }

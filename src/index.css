@@ -102,3 +102,9 @@ button {
   font-size: 1.4rem;
   margin: .3rem;
 }
+
+.addedData {
+  width: 50%;
+  margin: 1rem auto;
+
+}
