@@ -12,7 +12,7 @@ function App() {
     axios.get('http://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}')
       .then(resp => {
         const persons = resp.data
-        setAppState({ loading: false, persons: persons })
+        setAppState({ loading: false, persons: persons, dataSize: 'small' })
       })
   }
 
@@ -21,7 +21,7 @@ function App() {
     axios.get('http://www.filltext.com/?rows=1000&id={number|1000}&firstName={firstName}&delay=3&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}')
       .then(resp => {
         const persons = resp.data
-        setAppState({ loading: false, persons: persons })
+        setAppState({ loading: false, persons: persons, dataSize: 'large' })
       })
   }
 
@@ -29,6 +29,7 @@ function App() {
     {
       loading: false,
       persons: null,
+      dataSize: '',
     }
   )
 
@@ -38,7 +39,7 @@ function App() {
     <div className="app">
       <button onClick={loadSmall}>Малая база данных</button>
       <button onClick={loadLarge}>Крупная база данных</button>
-      <DataLoading isLoading={appState.loading} persons={appState.persons} />
+      <DataLoading isLoading={appState.loading} persons={appState.persons} dataSize={appState.dataSize} />
     </div>
   );
 }

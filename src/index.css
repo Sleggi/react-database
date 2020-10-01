@@ -71,3 +71,34 @@ button {
 .selected {
   background-color: lightsalmon;
 }
+
+.data-table {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-data {
+  align-self: center;
+  margin: 1rem;
+  font-size: 1.8rem;
+}
+
+.add-data__btn {
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.add-data__window {
+  width: 50%;
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-data__window input {
+  width: 40%;
+  height: 4rem;
+  padding-left: .3rem;
+  font-size: 1.4rem;
+  margin: .3rem;
+}
