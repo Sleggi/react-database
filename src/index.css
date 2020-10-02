@@ -128,3 +128,13 @@ button {
 .current-page {
   background-color: lightgreen;
 }
+
+
+/* Search */
+
+.search-input {
+  width: 40%;
+  margin: 3rem auto;
+  height: 3rem;
+  padding-left: .5rem;
+}

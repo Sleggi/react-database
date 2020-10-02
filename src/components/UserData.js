@@ -40,6 +40,7 @@ function UserData(props) {
     return (
         <div className='data-table'>
             <p className='add-data'>Добавить данные в <button className='add-data__btn' onClick={handleAddData}>таблицу</button></p>
+
             {
                 showAddData ? <AddData setAddedData={setAddedData} /> : ''
             }

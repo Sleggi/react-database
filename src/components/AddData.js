@@ -12,15 +12,15 @@ function AddData({ setAddedData }) {
         body: ''
     }
 
-    const handlePostData = (values, { resetForm }) => {
-        axios.post('https://jsonplaceholder.typicode.com/comments', values)
-            .then((resp) => {
-                const addedData = resp.data;
-                setAddedData(addedData)
-            })
-            .catch(err => console.log(err));
-        resetForm({ values: '' });
-    }
+    const handlePostData = (values, { resetForm }) => (
+        values.firstName && values.email && values.body ?
+            axios.post('https://jsonplaceholder.typicode.com/comments', values)
+                .then((resp) => {
+                    const addedData = resp.data;
+                    setAddedData(addedData)
+                }) : alert('Заполните поля ввода'),
+        resetForm(values = '')
+    )
 
 
 
