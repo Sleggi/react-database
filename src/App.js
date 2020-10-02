@@ -14,7 +14,7 @@ function App() {
     }
   )
 
-  
+
 
   useEffect(() => {
     setAppState({ loading: true })
@@ -24,6 +24,7 @@ function App() {
         loading: false,
         posts: posts
       })
+      console.log(posts)
     })
   }, [setAppState]);
 
