@@ -37,6 +37,8 @@ td {
   border: 1px solid black;
 }
 
+
+
 table {
   width: 80%;
   margin: 0 auto;
@@ -137,4 +139,14 @@ button {
   margin: 3rem auto;
   height: 3rem;
   padding-left: .5rem;
+}
+
+/* Sort */
+
+.icon-transform {
+  transform: rotate(180deg);
+}
+
+.sort-icon {
+  cursor: pointer;
 }

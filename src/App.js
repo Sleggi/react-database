@@ -16,24 +16,27 @@ function App() {
   )
   // Состояние серверного поиска
   const [search, setSearch] = useState('');
+  // Состояние сортировки
+  const [sorted, setSorted] = useState(false)
   // стейт инпута поиска
   const [searchInput, setSearchInput] = React.useState('')
   // Отправление поискового запроса
   const handleSearch = () => {
-    setSearch(searchInput)
+    setSearch(searchInput);
+
   }
 
 
   useEffect(() => {
     setAppState({ loading: true })
-    axios.get(`https://jsonplaceholder.typicode.com/comments?q=${search}`).then((resp) => {
+    axios.get(`https://jsonplaceholder.typicode.com/comments?q=${search}&${sorted ? `_sort=email&order=asc` : ''}`).then((resp) => {
       const posts = resp.data;
       setAppState({
         loading: false,
         posts: posts
       })
     })
-  }, [search]);
+  }, [search, sorted]);
 
 
 
@@ -43,7 +46,7 @@ function App() {
     <div className="app">
       <input type="text" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} className='search-input' />
       <button onClick={handleSearch}>Поиск</button>
-      <DataLoading isLoading={appState.loading} posts={appState.posts} search={search} setSearch={setSearch} />
+      <DataLoading isLoading={appState.loading} posts={appState.posts} sorted={sorted} setSorted={setSorted} />
     </div>
   );
 }
